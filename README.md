@@ -1,5 +1,6 @@
 # germcall
 ```
+$ python germcall.py -h
 usage: germcall.py [-h] [-b BAMS [BAMS ...]] [-c CONFIG] [-e EXOMEBED]
                    [-l LIST_OF_TOOLS [LIST_OF_TOOLS ...]] [-o OUTPUT_DIR]
                    [-d DRYRUN]
@@ -17,9 +18,9 @@ optional arguments:
   -l LIST_OF_TOOLS [LIST_OF_TOOLS ...], --list_of_tools LIST_OF_TOOLS [LIST_OF_TOOLS ...]
                         List of tools to run, by default runs all available
                         tools. Curently supported tools: strelka, freebayes,
-                        gatk. If running multiple tools, simply append
-                        additional tool name separated with a space. ex) -l
-                        strelka gatk
+                        manta. GATK will be added later. If running multiple
+                        tools, simply append additional tool name separated
+                        with a space. ex) -l strelka freebayes
   -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         output directory to write results
   -d DRYRUN, --dryrun DRYRUN
