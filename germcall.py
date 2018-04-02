@@ -26,8 +26,8 @@ def argument_parser():
     parser.add_argument('-b', '--bams', required=False, nargs='+',help='Bam files to run germline calls')
     parser.add_argument('-c', '--config', required=False, default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.yml'))
     parser.add_argument('-e', '--exomeBed', required=False, default=0, help='Exome capture BED file, supply only if Bam files specified in -b arguments are whole exome sequencing')
-    parser.add_argument('-l', '--list_of_tools', required=False, nargs='+', default=['strelka', 'freebayes', 'gatk'],
-                        help='List of tools to run, by default runs all available tools. Curently supported tools: strelka, freebayes, gatk. If running multiple tools, simply append additional tool name separated with a space. ex) -l strelka gatk')
+    parser.add_argument('-l', '--list_of_tools', required=False, nargs='+', default=['strelka', 'freebayes', 'manta'],
+                        help='List of tools to run, by default runs all available tools. Curently supported tools: strelka, freebayes, manta. GATK will be added later. If running multiple tools, simply append additional tool name separated with a space. ex) -l strelka freebayes')
     parser.add_argument('-o', '--output_dir', required=False, default=os.getcwd(), help='output directory to write results')
     parser.add_argument('-d', '--dryrun', required=False, type=int, default=1,
                         help='If set to 1, will print out shell commands that ar run. If set to 0 will actually run the commands')
