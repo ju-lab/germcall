@@ -1,0 +1,12 @@
+manta: /home/users/cjyoon/anaconda3/envs/py27/share/manta-1.2.1-0/bin/configManta.py
+strelka_germline: /home/users/cjyoon/anaconda3/envs/py27/share/strelka-2.8.4-0/bin/configureStrelkaGermlineWorkflow.py
+freebayes: /home/users/cjyoon/anaconda3/bin/freebayes
+python3: /home/users/cjyoon/anaconda3/bin/python
+python2: /home/users/cjyoon/anaconda3/envs/py27/bin/python
+java: /home/users/cjyoon/tools/jdk-9.0.1/bin/java
+gatk: /home/users/cjyoon/tools/gatk/GenomeAnalysisTK.jar
+exac: /home/users/cjyoon/reference/ExAC/ExAC.r1.sites.vep.vcf.gz
+dbsnp: /home/users/cjyoon/reference/dbSNP/All_20161121.vcf.gz
+reference: /home/users/data/01_reference/human_g1k_v37/human_g1k_v37.fa
+bgzip: /home/users/cjyoon/anaconda3/bin/bgzip
+tabix: /home/users/cjyoon/anaconda3/bin/tabix
