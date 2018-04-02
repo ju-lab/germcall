@@ -153,6 +153,44 @@ def run_strelka(python2_path,  strelka_germline_path, tabix_path, bgzip_path, ou
 
     return 0
 
+def run_manta(python2_path,  manta_path, tabix_path, bgzip_path, output_dir, reference_path, bamList, exome_bed, dryrun):
+    """runs manta germline with python2, creates a runnable script to execute
+    Need to run manta first to use its output"""
+    # create strelka configuration file
+    bamString = ''
+    for bam in bamList:
+        bamString += ' --bam ' + bam
+
+
+    if exome_bed != 0:
+        # unlike freebayes, strelka/manta requires BED file to be gzipped with tabix.
+        # thus need to create a new copy of BED file for gzipping and tabixing.
+        strelka_bed = f'{exome_bed}.strelka.bed'
+        strelka_bed_gz = f'{exome_bed}.strelka.bed.gz'
+        if os.path.isfile(strelka_bed_gz):
+            # if strelka bed.gz file is alreay present, then skip
+            pass
+        else:
+            execute(f'cp {exome_bed} {strelka_bed}', dryrun)
+            # once copy of BED file is created then, create .bed.gz and .bed.gz.tbi files
+            bgzip_tabix(bgzip_path, tabix_path, strelka_bed, 'bed', dryrun)
+
+        exomeString = f' --callRegions {strelka_bed_gz}'
+    else:
+        exomeString = ''
+
+
+    manta_configCMD = f'{python2_path} {manta_path} {bamString} --referenceFasta {reference_path} --runDir {output_dir} {exomeString}'
+    execute(manta_configCMD, dryrun)
+
+    # now run the runWorkflow.py script generated from'runWorkflow.py' above
+    # command
+    manta_script = os.path.join(output_dir, 'runWorkflow.py')
+    manta_runCMD = f'{python2_path} {manta_script} -m local -j 8 --quiet'
+    execute(manta_runCMD, dryrun)
+
+    return 0
+
 
 def run_gatk_hayplotypecaller(java_path, gatk_path, output_dir, reference_path, bamPath, dbsnp, dryrun):
     """run gatk haplotypeCaller according to best practices
@@ -263,6 +301,9 @@ def main():
  
     if 'gatk' in list_of_tools:
         pass
+
+    if 'manta' in list_of_tools:
+        run_manta(path['python2'], path['manta'], path['tabix'], path['bgzip'], output_dir_tools['manta'], path['reference'], bams, exomeBed, dryrun)
 
     return 0
 
